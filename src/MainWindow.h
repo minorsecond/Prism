@@ -6,11 +6,11 @@
 #define PRISM_MAINWINDOW_H
 
 #include <vector>
-
 #include <QtWidgets/QMainWindow>
+
 #include "../gui/ui_mainwindow.h"
 #include "ExifData.h"
-
+#include "exif_tags.h"
 
 class MainWindow : public QMainWindow {
 Q_OBJECT
@@ -25,13 +25,13 @@ private:
 
     void populate_attribute_picker();
 
-    std::smatch regex_finder(const std::string &in_string);
+    std::string regex_finder(const std::string &in_string);
 
     void get_input_directory();
 
     void get_output_directory();
 
-    std::vector<std::string> get_attributes();
+    std::vector<Exiv2::ExifKey> get_attributes();
 
     std::vector<ExifData> read_images();
 
@@ -44,25 +44,25 @@ private:
 
     std::string get_output_path();
 
-    std::map<std::string, std::string> exif_attributes{
-            {"Camera Make {cmake}",                            "Exif.Image.Make"},
-            {"Camera Model {cmodel}",                          "Exif.Image.Model"},
-            {"Camera Orientation {corient}",                   "Exif.Image.Orientation"},
-            {"Image X Resolution {xres}",                      "Exif.Photo.FocalPlaneXResolution"},
-            {"Image Y Resolution {yres}",                      "Exif.Photo.FocalPlaneYResolution"},
-            {"Exposure Time {etime}",                          "Exif.Photo.ExposureTime"},
-            {"ISO {iso}",                                      "Exif.Photo.ISOSpeedRatings"},
-            {"Date & Time Created (YYYY-MM-DD HH-MM) {dtime}", "Exif.Photo.DateTimeOriginal"},
+    std::map<std::string, Exiv2::ExifKey> exif_attributes{
+            {"Camera Make {cmake}",                            Tags::CameraMake},
+            {"Camera Model {cmodel}",                          Tags::CameraModel},
+            {"Camera Orientation {corient}",                   Tags::CameraOrientation},
+            {"Image X Resolution {xres}",                      Tags::XResolution},
+            {"Image Y Resolution {yres}",                      Tags::YResolution},
+            {"Exposure Time {etime}",                          Tags::ExposureTime},
+            {"ISO {iso}",                                      Tags::ISO},
+            {"Date & Time Created (YYYY-MM-DD HH-MM) {dtime}", Tags::DateHMS},
             //"Date & Time Created (YYYY-MM-DD HH-MM-SS) {dtimes}": "Exif.Photo.DateTimeOriginal",
-            {"Aperture Value {aperval}",                       "Exif.Photo.ApertureValue"},
-            {"Metering Mode {meter}",                          "Exif.Photo.MeteringMode"},
-            {"Image Number {inum}",                            "Exif.Image.ImageNumber"},
-            {"Exposure Mode {exmode}",                         "Exif.Photo.ExposureMode"},
-            {"White Balance Mode {wb}",                        "Exif.Photo.WhiteBalance"},
-            {"Camera Serial Number {cserial}",                 "Exif.Photo.BodySerialNumber"},
-            {"Lens Make {lmake}",                              "Exif.Photo.LensMake"},
-            {"Lens Model {lmodel}",                            "Exif.Photo.LensModel"},
-            {"Lens Serial Number {lserial}",                   "Exif.Photo.LensSerialNumber"}
+            {"Aperture Value {aperval}",                       Tags::ApertureValue},
+            {"Metering Mode {meter}",                          Tags::MeterMode},
+            {"Image Number {inum}",                            Tags::ImageNumber},
+            {"Exposure Mode {exmode}",                         Tags::ExposureMode},
+            {"White Balance Mode {wb}",                        Tags::WhiteBalance},
+            {"Camera Serial Number {cserial}",                 Tags::CameraSerialNumber},
+            {"Lens Make {lmake}",                              Tags::LensMake},
+            {"Lens Model {lmodel}",                            Tags::LensModel},
+            {"Lens Serial Number {lserial}",                   Tags::LensSerialNumber}
     };
 };
 

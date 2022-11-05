@@ -20,75 +20,75 @@ ExifData::ExifData(const std::string &file_path) {
 }
 
 std::string ExifData::camera_make() const {
-    return ExifTagValue(tags.CameraMake);
+    return ExifTagValue(Tags::CameraMake);
 }
 
 std::string ExifData::camera_model() const {
-    return ExifTagValue(tags.CameraModel);
+    return ExifTagValue(Tags::CameraModel);
 }
 
 std::string ExifData::camera_orientation() const {
-    return ExifTagValue(tags.CameraOrientation);
+    return ExifTagValue(Tags::CameraOrientation);
 }
 
 std::string ExifData::camera_serial_num() const {
-    return ExifTagValue(tags.CameraSerialNumber);
+    return ExifTagValue(Tags::CameraSerialNumber);
 }
 
 std::string ExifData::x_resolution() const {
-    return ExifTagValue(tags.XResolution);
+    return ExifTagValue(Tags::XResolution);
 }
 
 std::string ExifData::y_resolution() const {
-    return ExifTagValue(tags.YResolution);
+    return ExifTagValue(Tags::YResolution);
 }
 
 std::string ExifData::exposure_time() const {
-    return ExifTagValue(tags.ExposureMode);
+    return ExifTagValue(Tags::ExposureMode);
 }
 
 std::string ExifData::iso() const {
-    return ExifTagValue(tags.ISO);
+    return ExifTagValue(Tags::ISO);
 }
 
 std::string ExifData::date_hms() const {
-    return ExifTagValue(tags.DateHMS);
+    return ExifTagValue(Tags::DateHMS);
 }
 
 std::string ExifData::aperture_value() const {
-    return ExifTagValue(tags.ApertureValue);
+    return ExifTagValue(Tags::ApertureValue);
 }
 
 std::string ExifData::meter_mode() const {
-    return ExifTagValue(tags.MeterMode);
+    return ExifTagValue(Tags::MeterMode);
 }
 
 std::string ExifData::image_number() const {
-    return ExifTagValue(tags.ImageNumber);
+    return ExifTagValue(Tags::ImageNumber);
 }
 
 std::string ExifData::exposure_mode() const {
-    return ExifTagValue(tags.ExposureMode);
+    return ExifTagValue(Tags::ExposureMode);
 }
 
 std::string ExifData::white_balance() const {
-    return ExifTagValue(tags.WhiteBalance);
+    return ExifTagValue(Tags::WhiteBalance);
 }
 
 std::string ExifData::lens_make() const {
-    return ExifTagValue(tags.LensMake);
+    return ExifTagValue(Tags::LensMake);
 }
 
 std::string ExifData::lens_model() const {
-    return ExifTagValue(tags.LensModel);
+    return ExifTagValue(Tags::LensModel);
 }
 
 std::string ExifData::lens_serial_num() const {
-    return ExifTagValue(tags.LensSerialNumber);
+    return ExifTagValue(Tags::LensSerialNumber);
 }
 
 std::string ExifData::ExifTagValue(const Exiv2::ExifKey &tag) const {
-    const Exiv2::ExifData::iterator pos{Data.findKey(tag)};
+    const auto pos{Data.findKey(tag)};
     const std::unique_ptr<Exiv2::Value> val{pos->getValue()};
     return val->toString();
 }

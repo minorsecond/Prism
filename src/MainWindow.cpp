@@ -44,16 +44,16 @@ void MainWindow::get_output_directory() {
     ui->outputPathEdit->setText(output_path);
 }
 
-std::vector<std::string> MainWindow::get_attributes() {
-    std::vector<std::string> attributes_to_get{};
+std::vector<Exiv2::ExifKey> MainWindow::get_attributes() {
+    std::vector<Exiv2::ExifKey> attributes_to_get{};
     const std::string filename_structure{ui->pathFormatLineEdit->text().toStdString()};
-    std::smatch selected_attributes{regex_finder(filename_structure)};
+    std::string selected_attributes{regex_finder(filename_structure)};
 
     for (const auto &item: exif_attributes) {
         const std::string name{item.first};
-        const std::string exif_tag{item.second};
+        const Exiv2::ExifKey exif_tag{item.second};
         std::string result{};
-        std::smatch tag_abbrev{regex_finder(name)};
+        std::string tag_abbrev{regex_finder(name)};
 
         //for (std::string attribute : selected_attributes) {
         //    if (tag_abbrev == attribute) {
@@ -65,12 +65,12 @@ std::vector<std::string> MainWindow::get_attributes() {
     return attributes_to_get;
 }
 
-std::smatch MainWindow::regex_finder(const std::string &in_string) {
+std::string MainWindow::regex_finder(const std::string &in_string) {
     const std::regex pattern{"{(.*?)}"};
     std::smatch m{};
     std::regex_search(in_string, m, pattern);
 
-    return m;
+    return m.str();
 }
 
 std::vector<ExifData> MainWindow::read_images() {
@@ -105,7 +105,7 @@ std::vector<ExifData> MainWindow::read_images() {
 }
 
 void MainWindow::add_attribute() {
-    const std::string chosen_attribute{regex_finder(ui->attributeSelectorInput->currentText().toStdString()).str()};
+    const std::string chosen_attribute{regex_finder(ui->attributeSelectorInput->currentText().toStdString())};
     const std::string filename_format_text{ui->pathFormatLineEdit->text().toStdString() + chosen_attribute};
     ui->pathFormatLineEdit->setText(QString::fromStdString(filename_format_text));
 }

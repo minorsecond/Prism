@@ -17,7 +17,7 @@ find_package(Qt6 COMPONENTS
 
 find_package(Exiv2 REQUIRED)
 
-add_executable(Prism src/main.cpp src/MainWindow.cpp src/MainWindow.h src/ExifData.cpp src/ExifData.h)
+add_executable(Prism src/main.cpp src/MainWindow.cpp src/MainWindow.h src/ExifData.cpp src/ExifData.h src/exif_tags.h)
 target_link_libraries(Prism
         Qt::Core
         Qt::Gui

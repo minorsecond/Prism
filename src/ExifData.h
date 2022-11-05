@@ -8,28 +8,9 @@
 #include <exiv2/exiv2.hpp>
 #include <exiv2/image.hpp>
 #include <exiv2/error.hpp>
-
 #include <string>
 
-struct Tags {
-    const Exiv2::ExifKey CameraMake = Exiv2::ExifKey("Exif.Image.Make");
-    const Exiv2::ExifKey CameraModel = Exiv2::ExifKey("Exif.Image.Model");
-    const Exiv2::ExifKey CameraOrientation = Exiv2::ExifKey("Exif.Image.Orientation");
-    const Exiv2::ExifKey CameraSerialNumber = Exiv2::ExifKey("Exif.Image.CameraSerialNumber");
-    const Exiv2::ExifKey XResolution = Exiv2::ExifKey("Exif.Image.XResolution");
-    const Exiv2::ExifKey YResolution = Exiv2::ExifKey("Exif.Image.YResolution");
-    const Exiv2::ExifKey ExposureTime = Exiv2::ExifKey("Exif.Image.ExposureTime");
-    const Exiv2::ExifKey ISO = Exiv2::ExifKey("Exif.Image.ISOSpeedRatings");
-    const Exiv2::ExifKey DateHMS = Exiv2::ExifKey("Exif.Image.DateTimeOriginal");
-    const Exiv2::ExifKey ApertureValue = Exiv2::ExifKey("Exif.Image.ApertureValue");
-    const Exiv2::ExifKey MeterMode = Exiv2::ExifKey("Exif.Image.MeteringMode");
-    const Exiv2::ExifKey ImageNumber = Exiv2::ExifKey("Exif.Image.ImageNumber");
-    const Exiv2::ExifKey ExposureMode = Exiv2::ExifKey("Exif.Image.ExposureMode");
-    const Exiv2::ExifKey WhiteBalance = Exiv2::ExifKey("Exif.Image.WhiteBalance");
-    const Exiv2::ExifKey LensMake = Exiv2::ExifKey("Exif.Image.LensMake");
-    const Exiv2::ExifKey LensModel = Exiv2::ExifKey("Exif.Image.LensModel");
-    const Exiv2::ExifKey LensSerialNumber = Exiv2::ExifKey("Exif.Image.LensSerialNumber");
-};
+#include "exif_tags.h"
 
 class ExifData {
 public:
@@ -73,7 +54,7 @@ public:
 
 private:
     Tags tags;
-    Exiv2::ExifData Data;
+    Exiv2::ExifData Data{};
 
     std::string ExifTagValue(const Exiv2::ExifKey &tag) const;
 };
