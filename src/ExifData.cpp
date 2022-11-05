@@ -91,11 +91,13 @@ std::string ExifData::lens_serial_num() const {
 std::string ExifData::ExifTagValue(const Exiv2::ExifKey &tag) const {
     std::unique_ptr<Exiv2::Value> v{Exiv2::Value::create(Exiv2::asciiString)};
     auto pos{Data.findKey(tag)};
-    if (pos == Data.end()) return "Unknown";
+    if (pos == Data.end()) {
+        return "Unknown(" + tag.tagName() + ")";
+    };
     try {
         std::string test{pos->value().toString()};
         return pos->value().toString();
     } catch (std::exception &e) {
-        return "Unknown";
+        return "Unknown(" + tag.tagName() + ")";
     }
 }
