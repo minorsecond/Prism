@@ -35,45 +35,47 @@ class ExifData {
 public:
     explicit ExifData(const std::string &file_path);
 
-    std::string camera_make();
+    std::string image_path;
 
-    std::string camera_model();
+    std::string camera_make() const;
 
-    std::string camera_orientation();
+    std::string camera_model() const;
 
-    std::string camera_serial_num();
+    std::string camera_orientation() const;
 
-    std::string x_resolution();
+    std::string camera_serial_num() const;
 
-    std::string y_resolution();
+    std::string x_resolution() const;
 
-    std::string exposure_time();
+    std::string y_resolution() const;
 
-    std::string iso();
+    std::string exposure_time() const;
 
-    std::string date_hms();
+    std::string iso() const;
 
-    std::string aperture_value();
+    std::string date_hms() const;
 
-    std::string meter_mode();
+    std::string aperture_value() const;
 
-    std::string image_number();
+    std::string meter_mode() const;
 
-    std::string exposure_mode();
+    std::string image_number() const;
 
-    std::string white_balance();
+    std::string exposure_mode() const;
 
-    std::string lens_make();
+    std::string white_balance() const;
 
-    std::string lens_model();
+    std::string lens_make() const;
 
-    std::string lens_serial_num();
+    std::string lens_model() const;
+
+    std::string lens_serial_num() const;
 
 private:
     Tags tags;
     Exiv2::ExifData Data;
 
-    std::string ExifTagValue(const Exiv2::ExifKey &tag);
+    std::string ExifTagValue(const Exiv2::ExifKey &tag) const;
 };
 
 
