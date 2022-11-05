@@ -1,4 +1,4 @@
-<img style="float: right;" src="./res/prism.png" width="200" alt="prism"/>
+<img align="right" src="./res/prism.png" width="256" alt="prism"/>
 
 # Prism
 
