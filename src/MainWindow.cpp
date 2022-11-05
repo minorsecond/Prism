@@ -85,7 +85,11 @@ std::vector<ExifData> MainWindow::read_images() {
 
     for (const auto &entry: std::filesystem::directory_iterator(input_path)) {
         for (const std::string &ext: file_extensions) {
-            if (entry.path().extension() == ext) {
+            std::string extension{entry.path().extension().string()};
+            std::transform(extension.begin(), extension.end(), extension.begin(),
+                           [](unsigned char c) { return std::tolower(c); });
+
+            if (extension == ext) {
                 ExifData data(entry.path().string());
                 images.push_back(data);
             }
@@ -113,7 +117,7 @@ std::map<std::string, std::string> MainWindow::format_to_path(const std::vector<
     std::map<std::string, std::string> images_with_paths{};
 
     for (const ExifData &image: images) {
-        const std::string image_filename{image.image_path};
+        const std::string image_filename{std::filesystem::path(image.image_path).filename().string()};
 
         std::string path_format{ui->pathFormatLineEdit->text().toStdString()};
         path_format = std::regex_replace(path_format, std::regex(R"(\{cmake\})"), image.camera_make());
@@ -135,7 +139,7 @@ std::map<std::string, std::string> MainWindow::format_to_path(const std::vector<
         path_format = std::regex_replace(path_format, std::regex(R"(\{lserial\})"), image.lens_serial_num());
 
         path_format = replace_whitespaces(path_format);
-        const std::string new_root_path{output_path + path_format};
+        const std::string new_root_path{output_path + "/" + path_format};
         const std::string new_image_path{new_root_path + "/" + image_filename};
         images_with_paths[image.image_path] = new_image_path;
     }
@@ -168,8 +172,9 @@ void MainWindow::move_images(const std::map<std::string, std::string> &image_pat
     for (const auto &item: image_paths) {
         const std::string source{item.first};
         const std::string destination{item.second};
+        const std::string dir_path{std::filesystem::path(destination).parent_path().string()};
 
-        create_path(destination);
+        create_path(dir_path);
         std::filesystem::rename(source, destination);
         image_counter += 1;
         ui->progressBar->setValue(image_counter);

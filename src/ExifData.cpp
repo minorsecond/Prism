@@ -3,6 +3,7 @@
 //
 
 #include <exiv2/image.hpp>
+#include <iostream>
 
 #include "ExifData.h"
 
@@ -88,8 +89,13 @@ std::string ExifData::lens_serial_num() const {
 }
 
 std::string ExifData::ExifTagValue(const Exiv2::ExifKey &tag) const {
-    const auto pos{Data.findKey(tag)};
-    auto test{pos->getValue()};
-    const std::unique_ptr<Exiv2::Value> val{pos->getValue()};
-    return val->toString();
+    std::unique_ptr<Exiv2::Value> v{Exiv2::Value::create(Exiv2::asciiString)};
+    auto pos{Data.findKey(tag)};
+    if (pos == Data.end()) return "Unknown";
+    try {
+        std::string test{pos->value().toString()};
+        return pos->value().toString();
+    } catch (std::exception &e) {
+        return "Unknown";
+    }
 }
