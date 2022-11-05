@@ -100,9 +100,15 @@ std::vector<ExifData> MainWindow::read_images() {
 }
 
 void MainWindow::add_attribute() {
-    const std::string chosen_attribute{regex_finder(ui->attributeSelectorInput->currentText().toStdString())};
+    std::string chosen_attribute{};
+    if (!ui->pathFormatLineEdit->text().toStdString().empty()) {
+        chosen_attribute += "-";
+    }
+
+    chosen_attribute += regex_finder(ui->attributeSelectorInput->currentText().toStdString());
     const std::string filename_format_text{ui->pathFormatLineEdit->text().toStdString() + chosen_attribute};
     ui->pathFormatLineEdit->setText(QString::fromStdString(filename_format_text));
+    ui->pathFormatLineEdit->setFocus();
 }
 
 std::string MainWindow::replace_whitespaces(std::string in_string) {
@@ -120,6 +126,7 @@ std::map<std::string, std::string> MainWindow::format_to_path(const std::vector<
         const std::string image_filename{std::filesystem::path(image.image_path).filename().string()};
 
         std::string path_format{ui->pathFormatLineEdit->text().toStdString()};
+
         path_format = std::regex_replace(path_format, std::regex(R"(\{cmake\})"), image.camera_make());
         path_format = std::regex_replace(path_format, std::regex(R"(\{cmodel\})"), image.camera_model());
         path_format = std::regex_replace(path_format, std::regex(R"(\{cserial\})"), image.camera_serial_num());
