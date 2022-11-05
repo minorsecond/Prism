@@ -89,6 +89,7 @@ std::string ExifData::lens_serial_num() const {
 
 std::string ExifData::ExifTagValue(const Exiv2::ExifKey &tag) const {
     const auto pos{Data.findKey(tag)};
+    auto test{pos->getValue()};
     const std::unique_ptr<Exiv2::Value> val{pos->getValue()};
     return val->toString();
 }

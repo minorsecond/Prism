@@ -40,9 +40,24 @@ private:
     std::string replace_whitespaces(std::string in_string);
 
     std::map<std::string, std::string>
-    format_paths(const std::vector<ExifData> &images, const std::string &output_path);
+
+    format_to_path(const std::vector<ExifData> &images, const std::string &output_path);
 
     std::string get_output_path();
+
+    static void create_path(const std::string &path);
+
+    void move_images(const std::map<std::string, std::string> &image_path);
+
+    void process_images();
+
+    void enable_disable_output_path_edit();
+
+    void clicked_input_browse_button();
+
+    void clicked_output_browse_button();
+
+    void clicked_ok();
 
     std::map<std::string, Exiv2::ExifKey> exif_attributes{
             {"Camera Make {cmake}",                            Tags::CameraMake},
