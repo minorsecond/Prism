@@ -5,6 +5,8 @@
 #ifndef PRISM_MAINWINDOW_H
 #define PRISM_MAINWINDOW_H
 
+#include <exiv2/image.hpp>
+
 #include <QtWidgets/QMainWindow>
 #include "../gui/ui_mainwindow.h"
 

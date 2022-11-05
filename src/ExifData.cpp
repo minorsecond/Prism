@@ -1,9 +1,6 @@
 //
 // Created by rossw on 11/5/2022.
 //
-#include <exiv2/image.hpp>
-#include <exiv2/error.hpp>
-#include <exiv2/easyaccess.hpp>
 
 #include "ExifData.h"
 
@@ -20,69 +17,75 @@ ExifData::ExifData(const std::string &file_path) {
 }
 
 std::string ExifData::camera_make() {
-    return this->Data.findKey(Exiv2::ExifKey(tags.CameraMake))->getValue()->toString();
+    return ExifTagValue(tags.CameraMake);
 }
 
 std::string ExifData::camera_model() {
-    return this->Data.findKey(Exiv2::ExifKey(tags.CameraModel))->getValue()->toString();
+    return ExifTagValue(tags.CameraModel);
 }
 
 std::string ExifData::camera_orientation() {
-    return this->Data.findKey(Exiv2::ExifKey(tags.CameraOrientation))->getValue()->toString();
+    return ExifTagValue(tags.CameraOrientation);
 }
 
 std::string ExifData::camera_serial_num() {
-    return this->Data.findKey(Exiv2::ExifKey(tags.CameraSerialNumber))->getValue()->toString();
+    return ExifTagValue(tags.CameraSerialNumber);
 }
 
 std::string ExifData::x_resolution() {
-    return this->Data.findKey(Exiv2::ExifKey(tags.XResolution))->getValue()->toString();
+    return ExifTagValue(tags.XResolution);
 }
 
 std::string ExifData::y_resolution() {
-    return this->Data.findKey(Exiv2::ExifKey(tags.YResolution))->getValue()->toString();
+    return ExifTagValue(tags.YResolution);
 }
 
 std::string ExifData::exposure_time() {
-    return this->Data.findKey(Exiv2::ExifKey(tags.ExposureMode))->getValue()->toString();
+    return ExifTagValue(tags.ExposureMode);
 }
 
 std::string ExifData::iso() {
-    return this->Data.findKey(Exiv2::ExifKey(tags.ISO))->getValue()->toString();
+    return ExifTagValue(tags.ISO);
 }
 
 std::string ExifData::date_hms() {
-    return this->Data.findKey(Exiv2::ExifKey(tags.DateHMS))->getValue()->toString();
+    return ExifTagValue(tags.DateHMS);
 }
 
 std::string ExifData::aperture_value() {
-    return this->Data.findKey(Exiv2::ExifKey(tags.ApertureValue))->getValue()->toString();
+    return ExifTagValue(tags.ApertureValue);
 }
 
 std::string ExifData::meter_mode() {
-    return this->Data.findKey(Exiv2::ExifKey(tags.MeterMode))->getValue()->toString();
+    return ExifTagValue(tags.MeterMode);
 }
 
 std::string ExifData::image_number() {
-    return this->Data.findKey(Exiv2::ExifKey(tags.ImageNumber))->getValue()->toString();
+    return ExifTagValue(tags.ImageNumber);
 }
 
 std::string ExifData::exposure_mode() {
-    return this->Data.findKey(Exiv2::ExifKey(tags.ExposureMode))->getValue()->toString();
+    return ExifTagValue(tags.ExposureMode);
 }
 
 std::string ExifData::white_balance() {
-    return this->Data.findKey(Exiv2::ExifKey(tags.WhiteBalance))->getValue()->toString();
+    return ExifTagValue(tags.WhiteBalance);
 }
 
 std::string ExifData::lens_make() {
-    return this->Data.findKey(Exiv2::ExifKey(tags.LensMake))->getValue()->toString();
+    return ExifTagValue(tags.LensMake);
 }
 
 std::string ExifData::lens_model() {
-    return this->Data.findKey(Exiv2::ExifKey(tags.LensModel))->getValue()->toString();
+    return ExifTagValue(tags.LensModel);
 }
 
 std::string ExifData::lens_serial_num() {
-    return this->Data.findKey(Exiv2::ExifKey(tags.LensSerialNumber))->getValue()->toString();
+    return ExifTagValue(tags.LensSerialNumber);
+}
+
+std::string ExifData::ExifTagValue(const Exiv2::ExifKey &tag) {
+    const Exiv2::ExifData::iterator pos{Data.findKey(tag)};
+    const std::unique_ptr<Exiv2::Value> val{pos->getValue()};
+    return val->toString();
 }

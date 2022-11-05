@@ -22,6 +22,7 @@ target_link_libraries(Prism
         Qt::Core
         Qt::Gui
         Qt::Widgets
+        exiv2
         )
 
 if (WIN32)

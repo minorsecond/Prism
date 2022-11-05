@@ -5,26 +5,30 @@
 #ifndef PRISM_EXIFDATA_H
 #define PRISM_EXIFDATA_H
 
+#include <exiv2/exiv2.hpp>
+#include <exiv2/image.hpp>
+#include <exiv2/error.hpp>
+
 #include <string>
 
 struct Tags {
-    const std::string CameraMake = "Exif.Image.Make";
-    const std::string CameraModel = "Exif.Image.Model";
-    const std::string CameraOrientation = "Exif.Image.Orientation";
-    const std::string CameraSerialNumber = "Exif.Image.CameraSerialNumber";
-    const std::string XResolution = "Exif.Image.XResolution";
-    const std::string YResolution = "Exif.Image.YResolution";
-    const std::string ExposureTime = "Exif.Image.ExposureTime";
-    const std::string ISO = "Exif.Image.ISOSpeedRatings";
-    const std::string DateHMS = "Exif.Image.DateTimeOriginal";
-    const std::string ApertureValue = "Exif.Image.ApertureValue";
-    const std::string MeterMode = "Exif.Image.MeteringMode";
-    const std::string ImageNumber = "Exif.Image.ImageNumber";
-    const std::string ExposureMode = "Exif.Image.ExposureMode";
-    const std::string WhiteBalance = "Exif.Image.WhiteBalance";
-    const std::string LensMake = "Exif.Image.LensMake";
-    const std::string LensModel = "Exif.Image.LensModel";
-    const std::string LensSerialNumber = "Exif.Image.LensSerialNumber";
+    const Exiv2::ExifKey CameraMake = Exiv2::ExifKey("Exif.Image.Make");
+    const Exiv2::ExifKey CameraModel = Exiv2::ExifKey("Exif.Image.Model");
+    const Exiv2::ExifKey CameraOrientation = Exiv2::ExifKey("Exif.Image.Orientation");
+    const Exiv2::ExifKey CameraSerialNumber = Exiv2::ExifKey("Exif.Image.CameraSerialNumber");
+    const Exiv2::ExifKey XResolution = Exiv2::ExifKey("Exif.Image.XResolution");
+    const Exiv2::ExifKey YResolution = Exiv2::ExifKey("Exif.Image.YResolution");
+    const Exiv2::ExifKey ExposureTime = Exiv2::ExifKey("Exif.Image.ExposureTime");
+    const Exiv2::ExifKey ISO = Exiv2::ExifKey("Exif.Image.ISOSpeedRatings");
+    const Exiv2::ExifKey DateHMS = Exiv2::ExifKey("Exif.Image.DateTimeOriginal");
+    const Exiv2::ExifKey ApertureValue = Exiv2::ExifKey("Exif.Image.ApertureValue");
+    const Exiv2::ExifKey MeterMode = Exiv2::ExifKey("Exif.Image.MeteringMode");
+    const Exiv2::ExifKey ImageNumber = Exiv2::ExifKey("Exif.Image.ImageNumber");
+    const Exiv2::ExifKey ExposureMode = Exiv2::ExifKey("Exif.Image.ExposureMode");
+    const Exiv2::ExifKey WhiteBalance = Exiv2::ExifKey("Exif.Image.WhiteBalance");
+    const Exiv2::ExifKey LensMake = Exiv2::ExifKey("Exif.Image.LensMake");
+    const Exiv2::ExifKey LensModel = Exiv2::ExifKey("Exif.Image.LensModel");
+    const Exiv2::ExifKey LensSerialNumber = Exiv2::ExifKey("Exif.Image.LensSerialNumber");
 };
 
 class ExifData {
@@ -68,6 +72,8 @@ public:
 private:
     Tags tags;
     Exiv2::ExifData Data;
+
+    std::string ExifTagValue(const Exiv2::ExifKey &tag);
 };
 
 
