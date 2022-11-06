@@ -65,7 +65,7 @@ private:
             {"Camera Orientation {corient}",                   Tags::CameraOrientation},
             {"Image X Resolution {xres}",                      Tags::XResolution},
             {"Image Y Resolution {yres}",                      Tags::YResolution},
-            {"Exposure Time {etime}",                          Tags::ExposureTime},
+            {"Exposure Time (seconds) {etime}",                Tags::ExposureTime},
             {"ISO {iso}",                                      Tags::ISO},
             {"Date & Time Created (YYYY-MM-DD HH-MM) {dtime}", Tags::DateHMS},
             //"Date & Time Created (YYYY-MM-DD HH-MM-SS) {dtimes}": "Exif.Photo.DateTimeOriginal",
