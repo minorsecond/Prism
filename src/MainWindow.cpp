@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->progressBar->setValue(0);
     ui->outputPathEdit->setDisabled(true);
     ui->outputPathBrowseButton->setDisabled(true);
+    ui->includeSidecarCheckbox->setHidden(true);
 
     const std::array<std::string, 4> white_space_replacement_strings{"None", ".", "_", "-"};
     for (const std::string &replacement_char: white_space_replacement_strings) {
@@ -36,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->attributeSelectorInput, &QComboBox::activated, this, &MainWindow::add_attribute);
     connect(ui->seperateOutputPathCheckbox, &QCheckBox::stateChanged, this,
             &MainWindow::enable_disable_output_path_edit);
+    connect(ui->rawCheckBox, &QCheckBox::stateChanged, this, &MainWindow::raw_checkbox_checked);
 }
 
 void MainWindow::populate_attribute_picker() {
@@ -219,4 +221,12 @@ void MainWindow::clicked_output_browse_button() {
 
 void MainWindow::clicked_ok() {
     process_images();
+}
+
+void MainWindow::raw_checkbox_checked() {
+    if (ui->rawCheckBox->isChecked()) {
+        ui->includeSidecarCheckbox->setVisible(true);
+    } else {
+        ui->includeSidecarCheckbox->setVisible(false);
+    }
 }

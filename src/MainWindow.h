@@ -59,6 +59,8 @@ private:
 
     void clicked_ok();
 
+    void raw_checkbox_checked();
+
     std::map<std::string, Exiv2::ExifKey> exif_attributes{
             {"Camera Make {cmake}",                            Tags::CameraMake},
             {"Camera Model {cmodel}",                          Tags::CameraModel},
