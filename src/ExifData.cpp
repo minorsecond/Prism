@@ -4,6 +4,7 @@
 
 #include <exiv2/image.hpp>
 #include <iostream>
+#include <math.h>
 
 #include "ExifData.h"
 
@@ -45,7 +46,7 @@ std::string ExifData::y_resolution() const {
 }
 
 std::string ExifData::exposure_time() const {
-    return ExifTagValue(Tags::ExposureMode);
+    return ExifTagValue(Tags::ExposureMode) + "s";
 }
 
 std::string ExifData::iso() const {
@@ -57,7 +58,15 @@ std::string ExifData::date_hms() const {
 }
 
 std::string ExifData::aperture_value() const {
-    return ExifTagValue(Tags::ApertureValue);
+    const std::string value{ExifTagValue(Tags::ApertureValue)};
+    const std::vector<std::string> split_value{split_string(value)};
+    const double numerator{std::stod(split_value[0])};
+    const double denominator{std::stod(split_value[1])};
+    const double f_value{(numerator / denominator)};
+    const double rounded{static_cast<float>(static_cast<int>(f_value * 10.)) / 10.};
+    std::stringstream stream;
+    stream << std::fixed << std::setprecision(1) << rounded;
+    return "f" + stream.str();
 }
 
 std::string ExifData::meter_mode() const {
@@ -95,9 +104,33 @@ std::string ExifData::ExifTagValue(const Exiv2::ExifKey &tag) const {
         return "Unknown(" + tag.tagName() + ")";
     };
     try {
-        std::string test{pos->value().toString()};
-        return pos->value().toString();
+        const std::string val{pos->value().toString()};
+        if (val.empty()) {
+            return "Unknown(" + tag.tagName() + ")";
+        } else {
+            return pos->value().toString();
+        }
     } catch (std::exception &e) {
         return "Unknown(" + tag.tagName() + ")";
     }
+}
+
+std::vector<std::string> ExifData::split_string(std::string in_string) {
+    std::vector<std::string> result;
+    std::string current;
+
+    for (int i{0}; i < in_string.size(); i++) {
+        if (in_string[i] == '/') {
+            if (!current.empty()) {
+                result.push_back(current);
+                current = "";
+            }
+            continue;
+        }
+        current += in_string[i];
+    }
+    if (!current.empty()) {
+        result.push_back(current);
+    }
+    return result;
 }

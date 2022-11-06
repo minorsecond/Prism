@@ -14,10 +14,10 @@ struct Tags {
     static inline const Exiv2::ExifKey CameraSerialNumber = Exiv2::ExifKey("Exif.Image.CameraSerialNumber");
     static inline const Exiv2::ExifKey XResolution = Exiv2::ExifKey("Exif.Image.XResolution");
     static inline const Exiv2::ExifKey YResolution = Exiv2::ExifKey("Exif.Image.YResolution");
-    static inline const Exiv2::ExifKey ExposureTime = Exiv2::ExifKey("Exif.Image.ExposureTime");
+    static inline const Exiv2::ExifKey ExposureTime = Exiv2::ExifKey("Exif.Photo.ExposureTime");
     static inline const Exiv2::ExifKey ISO = Exiv2::ExifKey("Exif.Image.ISOSpeedRatings");
     static inline const Exiv2::ExifKey DateHMS = Exiv2::ExifKey("Exif.Image.DateTimeOriginal");
-    static inline const Exiv2::ExifKey ApertureValue = Exiv2::ExifKey("Exif.Image.ApertureValue");
+    static inline const Exiv2::ExifKey ApertureValue = Exiv2::ExifKey("Exif.Photo.ApertureValue");
     static inline const Exiv2::ExifKey MeterMode = Exiv2::ExifKey("Exif.Image.MeteringMode");
     static inline const Exiv2::ExifKey ImageNumber = Exiv2::ExifKey("Exif.Image.ImageNumber");
     static inline const Exiv2::ExifKey ExposureMode = Exiv2::ExifKey("Exif.Photo.ExposureMode");

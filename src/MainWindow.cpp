@@ -133,7 +133,7 @@ std::map<std::string, std::string> MainWindow::format_to_path(const std::vector<
         path_format = std::regex_replace(path_format, std::regex(R"(\{corient\})"), image.camera_orientation());
         path_format = std::regex_replace(path_format, std::regex(R"(\{xres\})"), image.x_resolution());
         path_format = std::regex_replace(path_format, std::regex(R"(\{yres\})"), image.y_resolution());
-        path_format = std::regex_replace(path_format, std::regex(R"(\{etimes\})"), image.exposure_time());
+        path_format = std::regex_replace(path_format, std::regex(R"(\{etime\})"), image.exposure_time());
         path_format = std::regex_replace(path_format, std::regex(R"(\{iso\})"), image.iso());
         path_format = std::regex_replace(path_format, std::regex(R"(\{dtime\})"), image.date_hms());
         path_format = std::regex_replace(path_format, std::regex(R"(\{aperval\})"), image.aperture_value());

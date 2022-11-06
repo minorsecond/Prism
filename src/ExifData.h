@@ -56,6 +56,8 @@ private:
     Tags tags;
     Exiv2::ExifData Data{};
 
+    static std::vector<std::string> split_string(std::string in_string);
+
     std::string ExifTagValue(const Exiv2::ExifKey &tag) const;
 };
 
